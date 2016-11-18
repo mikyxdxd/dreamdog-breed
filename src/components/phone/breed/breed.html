@@ -1,0 +1,44 @@
+<div id="breed">
+    <div id="breed_continer" v-if="breed">
+      <div id="con_top" :style="{'background-image': 'url(' + breed.bannerImage + ')'}">
+        <div id="shadow"></div>
+        <div id="content">
+        <div id="til">{{breed.name}}</div>
+        <div id="sub_til">Size:<span id="size">{{breed.weight}}</span></div>
+          <!--<div id="sub_til">Height:<span id="size">{{breed.height}}</span></div>-->
+          <!--<div id="sub_til">Life Span:<span id="size">{{breed.lifeSpan}}</span></div>-->
+        <div id="des">{{breed.description}}
+         </div>
+        <div id="c_o_l">COST OF LIVING:<div class="d_count"><i v-for="n in parseInt(breed.costOfLiving)" class="d" :style="{'background-image': 'url(' + d_sign + ')'}" ></i><i v-for="n in 4 - parseInt(breed.costOfLiving)" class="d_t" :style="{'background-image': 'url(' + d_sign + ')'}" ></i></div></div>
+        </div>
+      </div>
+
+      <div id="con_bottom">
+        <div class="sec" v-for="chara in breedCharas">
+          <div class="sec_til" @click="slideDownList($event)">{{chara.title}}<div class="arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div></div>
+          <div class="list">`
+            <div class="item" v-for="sub_char in chara.subCharas"><div v-if="sub_char.show"><div class="char_name">{{sub_char.name}}</div><div class="b_count"><i v-for="n in parseInt(sub_char.rating)" class="b" :style="{'background-image': 'url(' + w_bone + ')'}" ></i><i v-for="n in (5 - parseInt(sub_char.rating))" class="b" :style="{'background-image': 'url(' + p_bone + ')'}" ></i></div></div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <div class="sec_til" @click="slideDownList($event)">Vital Stats<div class="arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></div></div>
+          <div class="list">`
+           <div class="item">
+             <div class="row"><div class="col s6 til">Weight:</div> <div class="b_count col  push-s1 s5 rel">{{breed.weight}}</div></div>
+           </div>
+            <div class="item">
+              <div class="row"> <div class="col s6 til">Height:</div>  <div class="b_count col  push-s1 s5 rel">{{breed.height}}</div></div>
+            </div>
+            <div class="item">
+              <div class="row"><div class="col s6 til">Life Span:</div> <div class="b_count col push-s1 s5 rel">{{breed.lifeSpan}}</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  <loading :loading.sync="fetching"></loading>
+</div>
